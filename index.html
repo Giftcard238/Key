@@ -1,1 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temporary Key Generator</title>
+<style>
+    body { background: #121212; color: #fff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    button { padding: 10px 20px; margin: 10px; font-size: 18px; cursor: pointer; }
+    #key { font-size: 24px; margin-top: 20px; color: #0f0; }
+</style>
+</head>
+<body>
 
+<h1>Temporary Key Generator</h1>
+<button id="generateBtn">Generate 10 Second Key</button>
+<div id="key">No key yet</div>
+
+<script>
+function randomKey(length = 8) {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
+}
+
+document.getElementById('generateBtn').addEventListener('click', () => {
+    const keyDiv = document.getElementById('key');
+    const key = randomKey(12); // random 12-character key
+    keyDiv.textContent = key + " (expires in 10 sec)";
+    
+    // expire after 10 sec
+    setTimeout(() => {
+        keyDiv.textContent = "Key expired!";
+    }, 10000);
+});
+</script>
+
+</body>
+</html>
